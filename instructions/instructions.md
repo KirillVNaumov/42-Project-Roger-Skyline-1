@@ -117,12 +117,16 @@ When installing you will be prompted to set root password along with non-root us
    
    * Run `sudo nano /etc/cron.d/survey.sh` and paste :
    
-   `if [[ $(($(date +%s) - $(date +%s -r /etc/crontab))) -lt 86400 ]]`
-	  `then`
-		 `echo "Crontab file has been modified" | sudo /usr/sbin/sendmail root`
-	  `fi`
+  `if [[ $(($(date +%s) - $(date +%s -r /etc/crontab))) -lt 86400 ]]`
+   
+  `then`
+  
+  `echo "Crontab file has been modified" | sudo /usr/sbin/sendmail root`
+  
+  `fi`
     
    * Run `crontab -e` 
+   
    `0 4 * * 1 /etc/cron.d/packages.sh
 	  @reboot /etc/cron.d/packages.sh
 	  0 0 * * * /etc/cron.d/survey.sh`
