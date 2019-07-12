@@ -27,23 +27,25 @@ When installing you will be prompted to set root password along with non-root us
  
  * Open `/etc/network/interfaces` in nano editor, edit the file as follows:
  
- `source /etc/network/interfaces.d/*`
+ ```source /etc/network/interfaces.d/*
   
- ` #The loopback network interface`
+  #The loopback network interface
   
-  `auto lo`
+  auto lo
   
-  `iface lo inet loopback`
+  iface lo inet loopback
   
- ` allow-hotplug enp0s3`
+  allow-hotplug enp0s3
   
-  `iface enp0s3 inet dhcp`
+  iface enp0s3 inet dhcp
   
-  `allow-hotplug enp0s8`
+  allow-hotplug enp0s8
   
-  `iface enp0s8 inet static 
+  
+  iface enp0s8 inet static 
      
-          address 192.168.56.3/30`
+          address 192.168.56.3/30
+  ```
   
   * Make user as root, open `/etc/passwd` , find user name and change `UID` and `GID` to `0`
   
