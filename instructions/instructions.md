@@ -61,7 +61,7 @@ When installing you will be prompted to set root password along with non-root us
   
   `#!/Bin/bash`
   
-    iptables-restore </etc/iptables.test.rules
+    `iptables-restore </etc/iptables.test.rules`
     
     iptables -F iptables -X iptables -t nat -F iptables -t nat -X iptables -t mangle -F iptables -t mangle -X
     
@@ -93,9 +93,9 @@ When installing you will be prompted to set root password along with non-root us
     
     iptables -N port-scanning
     
-    iptables -A port-scanning -p tcp --tcp-flags SYN,ACK,FIN,RST RST -m limit --limit 60/s --limit-burst 2 -j RETURN
+    iptables -A port-scanning -p tcp --tcp-flags SYN,ACK,FIN,RST RST -m limit --limit 60/s --limit-burst 2 -j RETURN`
     
-    iptables -A port-scanning -j DROP`
+    `iptables -A port-scanning -j DROP`
     
     
    
