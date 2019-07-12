@@ -41,7 +41,9 @@ When installing you will be prompted to set root password along with non-root us
   
   `allow-hotplug enp0s8`
   
-  `iface enp0s8 inet static address 192.168.56.3\30`
+  `iface enp0s8 inet static 
+     
+          address 192.168.56.3/30`
   
   * Make user as root, open `/etc/passwd` , find user name and change `UID` and `GID` to `0`
   
