@@ -17,13 +17,13 @@ When installing you will be prompted to set root password along with non-root us
 
 * Open `/etc/ssh/sshd_config` file using nano editor, change the lines as follows:
 
-`Port 6969
+`Port 6969`
 
- PasswordAuthentication yes
+`PasswordAuthentication yes`
  
- PermitRootLogin no
+ `PermitRootLogin no`
  
- PubkeyAuthentication yes`
+ `PubkeyAuthentication yes`
  
  * Open `/etc/network/interfaces` in nano editor, edit the file as follows:
  
@@ -60,45 +60,30 @@ When installing you will be prompted to set root password along with non-root us
   * Run `sudo nano /etc/network/if-pre-up.d/iptables` and paste the following in order to set a firewall:
   
   `#! / Bin / bash
-  
     iptables-restore </etc/iptables.test.rules
-    
     iptables -F iptables -X iptables -t nat -F iptables -t nat -X iptables -t mangle -F iptables -t mangle -X
-    
     iptables -P INPUT DROP
-    
     iptables -P OUTPUT DROP
-    
     iptables -P FORWARD DROP
-    
     iptables -A INPUT -m conntrack -ctstate ESTABLISHED, RELATED -j ACCEPT
-    
     iptables -A INPUT -p tcp -i enp0s8 -dport 2222 -j ACCEPT
-    
     iptables -A INPUT -p tcp -i enp0s8 -dport 80 -j ACCEPT
-    
     iptables -A INPUT -p tcp -i enp0s8 -dport 443 -j ACCEPT
-    
     iptables -A OUTPUT -m conntrack! --ctstate INVALID -j ACCEPT
-    
     iptables -I INPUT -i lo -j ACCEPT
-    
     iptables -A INPUT -j LOG
-    
     iptables -A FORWARD -j LOG
-    
     iptables -I INPUT -p tcp -dport 80 -m connlimit -connlimit-above 10 -connlimit-mask 20 -j DROP
-    
     #port scan
-    
     iptables -N port-scanning
+    iptables -A port-scanning -p tcp --tcp-flags SYN,ACK,FIN,RST RST -m limit --limit 60/s --limit-burst 2 -j RETURN
+    iptables -A port-scanning -j DROP`
+ 
     
-	   iptables -A port-scanning -p tcp --tcp-flags SYN,ACK,FIN,RST RST -m limit --limit 60/s --limit-burst 2 -j RETURN
     
-	   iptables -A port-scanning -j DROP`
     
-    * Change the permision of the file:
     
-    `sudo chmod +x /etc/network/if-pre-up.d/iptables`
+    
+   
 
 
