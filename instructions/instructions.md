@@ -59,7 +59,7 @@ When installing you will be prompted to set root password along with non-root us
   
   * Run `sudo nano /etc/network/if-pre-up.d/iptables` and paste the following in order to set a firewall:
   
-  `#! / Bin / bash
+  `#! / Bin / bash`
   
     iptables-restore </etc/iptables.test.rules
     
