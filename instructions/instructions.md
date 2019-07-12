@@ -127,9 +127,11 @@ When installing you will be prompted to set root password along with non-root us
     
    * Run `crontab -e` 
    
-   `0 4 * * 1 /etc/cron.d/packages.sh
-	  @reboot /etc/cron.d/packages.sh
-	  0 0 * * * /etc/cron.d/survey.sh`
+  `0 4 * * 1 /etc/cron.d/packages.sh
+   
+  @reboot /etc/cron.d/packages.sh
+  
+  0 0 * * * /etc/cron.d/survey.sh`
     
     
    
