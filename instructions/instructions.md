@@ -1,6 +1,6 @@
 # Roger-skyline
 
-The project has been done on Debian 9.8.0
+The project has been done on Debian version 9.8.0
 
 ### Step 1 - Installing Debian VM
 ----------------------------------------
@@ -17,13 +17,14 @@ When installing you will be prompted to set root password along with non-root us
 
 * Open `/etc/ssh/sshd_config` file using nano editor, change the lines as follows:
 
-`Port 6969`
-
-`PasswordAuthentication yes`
+ ```Port 6969
  
- `PermitRootLogin no`
- 
- `PubkeyAuthentication yes`
+  PasswordAuthentication yes
+  
+  PermitRootLogin no
+  
+  PubkeyAuthentication yes
+  ```
  
  * Open `/etc/network/interfaces` in nano editor, edit the file as follows:
  
