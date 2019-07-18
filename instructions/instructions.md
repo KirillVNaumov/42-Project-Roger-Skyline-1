@@ -56,7 +56,7 @@ When installing you will be prompted to set root password along with non-root us
   
   * Create ssh directory `mkdir .ssh`
   
-  * Paste the key into .ssh/authorized_keys
+  * Paste the key into `.ssh/authorized_keys`
   
   * In the `/etc/ssh/sshd_config` change line as follows: `PasswordAuthentication no`
   
@@ -64,43 +64,44 @@ When installing you will be prompted to set root password along with non-root us
   
   * Run `sudo nano /etc/network/if-pre-up.d/iptables` and paste the following in order to set a firewall:
   
-  `#!/Bin/bash`
+  ```#!/Bin/bash
   
-   `iptables-restore </etc/iptables.test.rules`
+   iptables-restore </etc/iptables.test.rules
     
-   `iptables -F iptables -X iptables -t nat -F iptables -t nat -X iptables -t mangle -F iptables -t mangle -X`
+   iptables -F iptables -X iptables -t nat -F iptables -t nat -X iptables -t mangle -F iptables -t mangle -X
     
-   `iptables -P INPUT DROP`
+   iptables -P INPUT DROP
     
-   `iptables -P OUTPUT DROP`
+   iptables -P OUTPUT DROP
     
-   `iptables -P FORWARD DROP`
+   iptables -P FORWARD DROP
     
-   `iptables -A INPUT -m conntrack -ctstate ESTABLISHED, RELATED -j ACCEPT`
+   iptables -A INPUT -m conntrack -ctstate ESTABLISHED, RELATED -j ACCEPT
     
-   `iptables -A INPUT -p tcp -i enp0s8 -dport 2222 -j ACCEPT`
+   iptables -A INPUT -p tcp -i enp0s8 -dport 2222 -j ACCEPT
     
-   `iptables -A INPUT -p tcp -i enp0s8 -dport 80 -j ACCEPT`
+   iptables -A INPUT -p tcp -i enp0s8 -dport 80 -j ACCEPT
     
-   `iptables -A INPUT -p tcp -i enp0s8 -dport 443 -j ACCEPT`
+   iptables -A INPUT -p tcp -i enp0s8 -dport 443 -j ACCEPT
     
-   `iptables -A OUTPUT -m conntrack! --ctstate INVALID -j ACCEPT`
+   iptables -A OUTPUT -m conntrack! --ctstate INVALID -j ACCEPT
     
-   `iptables -I INPUT -i lo -j ACCEPT`
+   iptables -I INPUT -i lo -j ACCEPT
     
-   `iptables -A INPUT -j LOG`
+   iptables -A INPUT -j LOG
     
-   `iptables -A FORWARD -j LOG`
+   iptables -A FORWARD -j LOG
     
-   `iptables -I INPUT -p tcp -dport 80 -m connlimit -connlimit-above 10 -connlimit-mask 20 -j DROP`
+   iptables -I INPUT -p tcp -dport 80 -m connlimit -connlimit-above 10 -connlimit-mask 20 -j DROP
     
-   `#port scan`
+   #port scan
     
-   `iptables -N port-scanning`
+   iptables -N port-scanning
     
-   `iptables -A port-scanning -p tcp --tcp-flags SYN,ACK,FIN,RST RST -m limit --limit 60/s --limit-burst 2 -j RETURN`
+   iptables -A port-scanning -p tcp --tcp-flags SYN,ACK,FIN,RST RST -m limit --limit 60/s --limit-burst 2 -j RETURN
 
-   `iptables -A port-scanning -j DROP`
+   iptables -A port-scanning -j DROP
+   ```
    
    * Change the permision of the file:
    
@@ -122,21 +123,22 @@ When installing you will be prompted to set root password along with non-root us
    
    * Run `sudo nano /etc/cron.d/survey.sh` and paste :
    
-  `if [[ $(($(date +%s) - $(date +%s -r /etc/crontab))) -lt 86400 ]]`
+  ```if [[ $(($(date +%s) - $(date +%s -r /etc/crontab))) -lt 86400 ]]
    
-  `then`
+  then
   
-  `echo "Crontab file has been modified" | sudo /usr/sbin/sendmail root`
+  echo "Crontab file has been modified" | sudo /usr/sbin/sendmail root
   
-  `fi`
+  fi
+  ```
     
    * Run `crontab -e` 
    
-  `0 4 * * 1 /etc/cron.d/packages.sh`
+  ```0 4 * * 1 /etc/cron.d/packages.sh
    
-  `@reboot /etc/cron.d/packages.sh`
+  @reboot /etc/cron.d/packages.sh
   
-  `0 0 * * * /etc/cron.d/survey.sh`
+  0 0 * * * /etc/cron.d/survey.sh
     
     
    
